@@ -1,8 +1,8 @@
-FROM node:20.22.0
+FROM node:latest
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y make python3 g++
+RUN apt-get update && apt-get install -y make
 
 COPY frontend-react/package*.json ./
 RUN npm install
