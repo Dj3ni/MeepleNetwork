@@ -1,0 +1,39 @@
+# Global ignores
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.*.local
+.idea/
+.vscode/
+*.log
+*.lock
+
+# Node (frontend/)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Symfony (backend/)
+backend/var/
+backend/vendor/
+backend/public/bundles/
+backend/.phpunit.result.cache
+
+# Docker
+docker/db-data/
+docker/php/vendor/
+docker-compose.override.yml
+
+# PHPUnit / Coverage
+coverage/
+backend/phpunit.xml
+backend/phpunit.xml.dist
+
+# Composer
+composer.lock
+backend/composer.lock
+
+# OS / System Files
+*.swp
+*~
