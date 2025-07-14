@@ -54,7 +54,7 @@ services:
       - /app/node_modules
     working_dir: /app
     ports:
-      - "${REACT_PORT}:3000"
+      - "${REACT_PORT}:5173"
     command: npm start
     networks:
       - symfony
