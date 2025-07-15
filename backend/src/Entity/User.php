@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
+use App\Trait\HydrateTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -15,8 +16,9 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use HydrateTrait;
+
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'uuid', unique: true)]
     private Uuid $id;
 
@@ -39,16 +41,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $firstName = null;
+    private string $firstName;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    private string $lastName;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $birthday = null;
+    private \DateTime $birthday;
 
-    public function __construct()
+    public function __construct(array $init = [])
     {
+        $this->hydrate($init);
         $this->id = Uuid::v4();
     }
 
@@ -145,7 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -157,7 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -169,7 +172,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthday(): ?\DateTime
+    public function getBirthday(): \DateTime
     {
         return $this->birthday;
     }
