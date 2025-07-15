@@ -12,6 +12,7 @@ services:
       - db
     environment:
       - APP_ENV=${APP_ENV}
+    command: sh -c "composer install && php-fpm"
     networks:
       - symfony
 
