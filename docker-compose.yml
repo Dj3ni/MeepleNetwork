@@ -8,6 +8,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./backend:/var/www/html
+      - ./backend/config/jwt:/var/www/config/jwt
     depends_on:
       - db
     environment:
